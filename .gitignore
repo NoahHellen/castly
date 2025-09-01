@@ -1,8 +1,8 @@
 /envs
 /.vscode
-/backend/.env
-/backend/node_modules
-/frontend/node_modules
+/server/.env
+/server/node_modules
+/client/node_modules
 /.git
 
 logs
