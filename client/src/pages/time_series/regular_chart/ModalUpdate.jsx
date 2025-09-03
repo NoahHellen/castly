@@ -1,9 +1,10 @@
 import React, { useRef, useImperativeHandle, forwardRef } from "react";
-import { useDatabase } from "../../services/api/db";
+import { useDatabase } from "../../../services/api/db";
 import { ChevronsRight } from "lucide-react";
 
-const AddModal = forwardRef((props, ref) => {
-  const { addRow, formData, setFormData, loading } = useDatabase();
+const ModalUpdate = forwardRef((props, ref) => {
+  const { formData, setFormData, loading, updateRow, deleteRow } =
+    useDatabase();
 
   const modalRef = useRef(null);
 
@@ -12,9 +13,19 @@ const AddModal = forwardRef((props, ref) => {
     close: () => modalRef.current.close(),
   }));
 
-  const handleSubmit = async (e) => {
+  const handleUpdate = async () => {
     try {
-      await addRow(e);
+      await updateRow(formData.id);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      modalRef.current.close();
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteRow(formData.id);
     } catch (error) {
       console.error(error);
     } finally {
@@ -28,46 +39,46 @@ const AddModal = forwardRef((props, ref) => {
         {/* Close button. */}
         <button
           type="button"
-          className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
           onClick={() => modalRef.current.close()}
+          className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
         >
           X
         </button>
 
-        {/* Title. */}
-        <h3 className="font-bold"> Add to time series </h3>
+        {/* Form title. */}
+        <h3 className="font-bold text-lg"> Update data point </h3>
 
-        <form onSubmit={handleSubmit} className="space-y-6 pt-5">
+        <form className="space-y-4 pt-4">
           {/* Date. */}
           <div className="form-control">
             <label className="label">
               <span className="label-text text-base font-medium">Date</span>
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-es-none text-base-content/50 z-10">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-base-content/50 z-10">
                 <ChevronsRight className="size-5" />
               </div>
               <input
                 type="date"
                 className="input input-bordered w-full pl-10 py-3 focus:input-primary transition-colors duration-200"
                 value={formData.date}
-                onChange={(e) =>
+                onChange={(event) =>
                   setFormData({
                     ...formData,
-                    date: e.target.value,
+                    date: event.target.value,
                   })
                 }
               />
             </div>
           </div>
 
-          {/* Price */}
+          {/* Price. */}
           <div className="form-control">
             <label className="label">
               <span className="label-text text-base font-medium">Price</span>
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-es-none text-base-content/50 z-10">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-base-content/50 z-10">
                 <ChevronsRight className="size-5" />
               </div>
               <input
@@ -77,42 +88,46 @@ const AddModal = forwardRef((props, ref) => {
                 placeholder="0.00"
                 className="input input-bordered w-full pl-10 py-3 focus:input-primary transition-colors duration-200"
                 value={formData.price}
-                onChange={(e) =>
+                onChange={(event) =>
                   setFormData({
                     ...formData,
-                    price: e.target.value,
+                    price: event.target.value,
                   })
                 }
               />
             </div>
-          </div>
 
-          {/* Actions. */}
-          <div className="flex justify-between modal-action">
-            <button
-              type="button"
-              className="btn btn-ghost"
-              onClick={() => modalRef.current.close()}
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={handleSubmit}
-              disabled={!formData.date || !formData.price || loading}
-            >
-              {loading ? (
-                <span className="loading loading-spinner loading-sm" />
-              ) : (
-                <>Add</>
-              )}
-            </button>
+            {/* Update or delete buttons. */}
+            <div className="flex justify-between pt-4">
+              <button
+                type="button"
+                className="btn btn-ghost"
+                onClick={() => modalRef.current.close()}
+              >
+                Cancel
+              </button>
+              <button
+                className="btn btn-ghost"
+                type="button"
+                onClick={handleDelete}
+                disabled={loading}
+              >
+                Delete
+              </button>
+              <button
+                className="btn btn-ghost"
+                type="button"
+                disabled={loading || !formData.id}
+                onClick={handleUpdate}
+              >
+                Update
+              </button>
+            </div>
           </div>
         </form>
       </div>
 
-      {/* Click anywhere to close */}
+      {/* Click anywhere to close. */}
       <div
         className="modal-backdrop"
         onClick={() => modalRef.current.close()}
@@ -121,4 +136,4 @@ const AddModal = forwardRef((props, ref) => {
   );
 });
 
-export default AddModal;
+export default ModalUpdate;

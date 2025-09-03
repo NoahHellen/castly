@@ -1,54 +1,21 @@
 import React, { useEffect, useRef } from "react";
-import { useDatabase } from "../../services/api/db";
 import { Line } from "react-chartjs-2";
-import Chart from "../../utils/chartConfig";
-import NoData from "../../components/NoData";
-import { formatDate } from "../../utils/formatDate";
-import ChangeDeleteModal from "./ChangeDeleteModal";
 
-function RegularChart() {
-  const {
-    timeSeries,
-    loading,
-    error,
-    fetchTimeSeries,
-    deleteRow,
-    setFormData,
-    updateRow,
-  } = useDatabase();
+import { useDatabase } from "../../../services/api/db";
+import Chart from "../../../utils/chartConfig";
+import NoData from "../../../components/NoData";
+import DatabaseError from "../../../components/DatabaseError";
+import LoadingData from "../../../components/LoadingData";
 
-  // Fetch data once when component mounts
+function BayesChart() {
+  const { timeSeries, loading, fetchTimeSeries } = useDatabase();
+
   useEffect(() => {
     fetchTimeSeries();
   }, []);
 
   const chartRef = useRef(null);
-  const modalRef = useRef(null);
 
-  const handleChartClick = async (event) => {
-    if (!chartRef.current) return;
-
-    const chart = chartRef.current;
-
-    const chartPoint = chart.getElementsAtEventForMode(
-      event.nativeEvent,
-      "nearest",
-      { intersect: true },
-      true
-    );
-
-    const dataPoint = timeSeries[chartPoint[0].index];
-
-    setFormData({
-      date: formatDate(dataPoint.date),
-      price: dataPoint.price,
-      id: dataPoint.id,
-    });
-
-    modalRef.current.showModal();
-  };
-
-  // Chart options
   const options = {
     responsive: true,
     plugins: {
@@ -126,26 +93,15 @@ function RegularChart() {
     ],
   };
 
-  if (loading) return <div>Loading chart data...</div>;
-  if (error) return <div>Error: {error}</div>;
-  if (timeSeries.length === 0)
-    return (
-      <div>
-        <NoData />
-      </div>
-    );
+  if (loading) return <LoadingData />;
 
   return (
     <div style={{ height: "400px", width: "75%", margin: "0 auto" }}>
-      <Line
-        onClick={handleChartClick}
-        ref={chartRef}
-        options={options}
-        data={data}
-      />
-      <ChangeDeleteModal ref={modalRef} />
+      <Line ref={chartRef} options={options} data={data} />
+      <NoData />
+      <DatabaseError />
     </div>
   );
 }
 
-export default RegularChart;
+export default BayesChart;

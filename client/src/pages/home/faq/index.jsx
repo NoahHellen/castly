@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Faq() {
   return (
     <div className="space-y-4 mt-8">
-      <div className="collapse bg-base-100 shadow-sm">
+      <div className="collapse bg-base-300 shadow-sm">
         <input type="checkbox" />
         <div className="collapse-title font-semibold ">
           How does the Bayesian method work?
@@ -15,7 +15,7 @@ function Faq() {
         </div>
       </div>
 
-      <div className="collapse bg-base-100 shadow-sm">
+      <div className="collapse bg-base-300 shadow-sm">
         <input type="checkbox" />
         <div className="collapse-title font-semibold">
           How do I input my own time series data?

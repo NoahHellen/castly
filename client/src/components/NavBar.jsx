@@ -1,7 +1,20 @@
+import React, { useEffect, useState } from "react";
 import { Bell, Menu, Search } from "lucide-react";
-import React from "react";
 
 function NavBar() {
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") || "cupcake"
+  );
+
+  useEffect(() => {
+    document.querySelector("html").setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "forest" ? "cupcake" : "forest"));
+  };
+
   return (
     <div className="navbar fixed z-50 bg-transparent">
       <div className="navbar-start">
@@ -55,8 +68,9 @@ function NavBar() {
           <div>
             <input
               type="checkbox"
-              value="dark"
               className="toggle theme-controller"
+              onChange={toggleTheme}
+              checked={theme === "forest"}
             />
           </div>
         </div>

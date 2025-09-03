@@ -1,5 +1,6 @@
-import { PackageIcon } from "lucide-react";
 import React, { useEffect } from "react";
+import { PackageIcon } from "lucide-react";
+
 import { useDatabase } from "../services/api/db";
 
 function NoData() {

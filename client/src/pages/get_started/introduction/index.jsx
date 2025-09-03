@@ -1,6 +1,6 @@
 import React from "react";
 
-function Intro() {
+function Introduction() {
   return (
     <div className="grid">
       <div className="hero bg-base-100 rounded-2xl">
@@ -18,4 +18,4 @@ function Intro() {
   );
 }
 
-export default Intro;
+export default Introduction;

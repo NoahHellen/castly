@@ -1,7 +1,7 @@
 import React from "react";
+
 import { useDatabase } from "../services/api/db";
 
-// Component to display if error in API call.
 function DatabaseError() {
   const { error } = useDatabase;
   return (

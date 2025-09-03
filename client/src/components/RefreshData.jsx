@@ -1,8 +1,9 @@
 import React from "react";
-import { useDatabase } from "../services/api/db";
 import { RefreshCwIcon } from "lucide-react";
 
-function Refresh() {
+import { useDatabase } from "../services/api/db";
+
+function RefreshData() {
   const { fetchTimeSeries } = useDatabase();
   return (
     <div className="flex justify-end">
@@ -13,4 +14,4 @@ function Refresh() {
   );
 }
 
-export default Refresh;
+export default RefreshData;

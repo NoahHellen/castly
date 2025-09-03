@@ -5,7 +5,7 @@ import { rdsConnection } from "../config/db.js";
 import { formatDate } from "../utils/formatDate.js";
 
 // Read and load apple data.
-const appleData = parse(fs.readFileSync(path.resolve("seeds/data/apple.csv")), {
+const appleData = parse(fs.readFileSync(path.resolve("seed/data/test.csv")), {
   columns: true,
   skip_empty_lines: true,
 });

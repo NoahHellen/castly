@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Steps() {
   return (
     <div className="space-y-20">
-      <div className="card w-auto bg-base-100 shadow-sm">
+      <div className="card w-auto bg-base-300 shadow-sm">
         <div className="card-body">
           <div className="flex items-start gap-16">
             <h2 className="text-normal font-bold">Step 1</h2>
@@ -15,12 +15,12 @@ function Steps() {
               your own.
             </span>
             <Link to="/time-series">
-              <button className="btn btn-base-100">Time series</button>
+              <button className="btn btn-secondary">Time series</button>
             </Link>
           </div>
         </div>
       </div>
-      <div className="card w-auto bg-base-100 shadow-sm">
+      <div className="card w-auto bg-base-300 shadow-sm">
         <div className="card-body">
           <div className="flex items-start gap-16">
             <h2 className="text-normal font-bold">Step 2</h2>
@@ -31,12 +31,12 @@ function Steps() {
               you can head over to the Bayeysian model.
             </span>
             <Link to="/bayes">
-              <button className="btn btn-base-100">Bayes forecast</button>
+              <button className="btn btn-secondary">Bayes forecast</button>
             </Link>
           </div>
         </div>
       </div>
-      <div className="card w-auto bg-base-100 shadow-sm">
+      <div className="card w-auto bg-base-300 shadow-sm">
         <div className="card-body">
           <div className="flex items-start gap-16">
             <h2 className="text-normal font-bold">Step 3</h2>
@@ -46,7 +46,9 @@ function Steps() {
               set up the model.
             </span>
             <Link to="/transformer">
-              <button className="btn btn-base-100">Transformer forecast</button>
+              <button className="btn btn-secondary">
+                Transformer forecast
+              </button>
             </Link>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React from "react";
-import Welcome from "./Welcome";
-import Faq from "./Faq";
+
+import Welcome from "./welcome";
+import Faq from "./faq";
 import DatabaseError from "../../components/DatabaseError";
 
 function HomePage() {

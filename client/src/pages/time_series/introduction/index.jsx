@@ -1,6 +1,6 @@
 import React from "react";
 
-function Intro() {
+function Introduction() {
   return (
     <div className="hero bg-base-100 rounded-2xl">
       <div className="hero-content text-center w-full max-w-5xl mx-auto">
@@ -19,4 +19,4 @@ function Intro() {
   );
 }
 
-export default Intro;
+export default Introduction;

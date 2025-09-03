@@ -1,7 +1,9 @@
 import { ChevronsRight } from "lucide-react";
 import React, { useRef } from "react";
-import { useDatabase } from "../../services/api/db";
-import AddModal from "./AddModal";
+
+import { useDatabase } from "../../../services/api/db";
+
+import ModalAdd from "./ModalAdd";
 
 function ChangeTimeSeries() {
   const { removeTimeSeries, newTimeSeries } = useDatabase();
@@ -52,7 +54,7 @@ function ChangeTimeSeries() {
         Replace all
       </button>
 
-      <AddModal ref={modalRef} />
+      <ModalAdd ref={modalRef} />
     </div>
   );
 }
