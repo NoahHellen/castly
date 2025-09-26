@@ -12,6 +12,9 @@
     },
     "ghcr.io/devcontainers/features/python:1": {
       "version": "3.13.7"
+    },
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest"
     }
   },
 
@@ -31,10 +34,10 @@
     }
   },
 
-  "runArgs": ["--network=host"]
+  "runArgs": ["--network=host"],
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "uname -a",
+  "postCreateCommand": "pip install -r /workspaces/castly/ai/requirements.txt && cd /workspaces/castly/server && npm install && cd /workspaces/castly/server && npm install"
 
   // Configure tool-specific properties.
   // "customizations": {},

@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { Pool } from "pg";
+import { neon } from '@neondatabase/serverless';
 
 // Load environment variables.
 dotenv.config();
@@ -7,14 +7,7 @@ dotenv.config();
 // Read environment variables.
 const { PGHOST, PGUSER, PGPASSWORD, PGDATABASE, PGPORT } = process.env;
 
-// Establish connection to RDS server.
-export const rdsConnection = new Pool({
-  user: PGUSER,
-  database: PGDATABASE,
-  port: PGPORT,
-  host: PGHOST,
-  password: PGPASSWORD,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
+// Establish connection to Neon server.
+export const sql = neon(
+  `postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require`
+)

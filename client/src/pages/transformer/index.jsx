@@ -5,7 +5,7 @@ import RefreshData from "../../components/RefreshData";
 import Introduction from "./introduction";
 import TransformerChart from "./transformer_chart";
 
-function BayesPage() {
+function TransformerPage() {
   return (
     <main className="max-w-6xl mx-auto px-4 py-8 pt-20">
       <Introduction />
@@ -15,4 +15,4 @@ function BayesPage() {
   );
 }
 
-export default BayesPage;
+export default TransformerPage;

@@ -20,10 +20,20 @@ export const useAi = create((set, get) => ({
       // Post time series data as lists.
       const values = timeSeries.map((ts) => Number(ts.price));
       const dates = timeSeries.map((ts) => formatDate(ts.date));
+
+      console.log("Posting to transformer", { dates, values });
+
       const response = await axios.post(`${BASE_URL}/transformer`, {
-        date: dates,
-        value: values,
+        dates: dates,
+        values: values,
+        n_forecast: 20,
+        epochs: 100,
+        history: 20,
+        seq_len: 5,
+        batch_size: 2,
       });
+
+      console.log("Received response from transformer:", response.data);
 
       // Store forecast data.
       set({ forecast: response.data, error: null });

@@ -22,7 +22,7 @@ function TransformerChart() {
     responsive: true,
     plugins: {
       legend: {
-        display: true,
+        display: false,
         position: "top",
       },
       tooltip: {
@@ -88,7 +88,7 @@ function TransformerChart() {
     labels: allLabels,
     datasets: [
       {
-        label: "Price + Forecast",
+        label: "Price",
         data: allValues,
         borderColor: "rgb(75, 192, 192)",
         backgroundColor: "rgba(75, 192, 192, 0.2)",
