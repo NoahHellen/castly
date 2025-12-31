@@ -1,11 +1,11 @@
-import fs from "fs";
-import path from "path";
-import { parse } from "csv-parse/sync";
-import { rdsConnection } from "../config/db.js";
-import { formatDate } from "../utils/formatDate.js";
+import path from 'node:path';
+import { parse } from 'csv-parse/sync';
+import fs from 'fs';
+import { rdsConnection } from '../config/db.js';
+import { formatDate } from '../utils/formatDate.js';
 
 // Read and load apple data.
-const appleData = parse(fs.readFileSync(path.resolve("seeds/data/test.csv")), {
+const appleData = parse(fs.readFileSync(path.resolve('seeds/data/test.csv')), {
   columns: true,
   skip_empty_lines: true,
   bom: true,
@@ -22,9 +22,9 @@ async function seedDatabase() {
         [formatDate(row.date), row.price]
       );
     }
-    console.log("Database seeded successfully");
+    console.log('Database seeded successfully');
   } catch (error) {
-    console.error("Error seeding database: ", error);
+    console.error('Error seeding database: ', error);
   }
 }
 

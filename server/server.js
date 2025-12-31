@@ -1,9 +1,9 @@
-import express from "express";
-import dotenv from "dotenv";
-import { rdsConnection } from "./config/db.js";
-import router from "./routes/routes.js";
-import { arcjectMiddleware } from "./middlewares/arcjetMiddleware.js";
-import { coreMiddleware } from "./middlewares/coreMiddleware.js";
+import dotenv from 'dotenv';
+import express from 'express';
+import { rdsConnection } from './config/db.js';
+import { arcjectMiddleware } from './middlewares/arcjetMiddleware.js';
+import { coreMiddleware } from './middlewares/coreMiddleware.js';
+import router from './routes/routes.js';
 
 // Load environment variables
 dotenv.config();
@@ -18,10 +18,10 @@ const PORT = process.env.PORT || 3000;
 coreMiddleware(app);
 
 // Arcjet middleware for rate limiting and bot detection.
-// app.use(arcjectMiddleware);
+app.use(arcjectMiddleware);
 
 // Base url for API routes.
-app.use("/api", router);
+app.use('/api', router);
 
 // Initialise RDS database.
 async function initDatabase() {
@@ -33,15 +33,15 @@ async function initDatabase() {
 				price NUMERIC(8,2)
 			)
 		`);
-    console.log("Database initialised successfully");
+    console.log('Database initialised successfully');
   } catch (error) {
-    console.log("Error in initDatabase function", error);
+    console.log('Error in initDatabase function', error);
   }
 }
 
 // Start server once database initialised.
 initDatabase().then(() => {
   app.listen(PORT, () => {
-    console.log("Server is running on port", PORT);
+    console.log('Server is running on port', PORT);
   });
 });

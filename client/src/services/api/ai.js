@@ -1,9 +1,9 @@
-import { create } from "zustand";
-import axios from "axios";
-import { formatDate } from "../../utils/formatDate";
-import { useDatabase } from "./db";
+import axios from 'axios';
+import { create } from 'zustand';
+import { formatDate } from '../../utils/formatDate';
+import { useDatabase } from './db';
 
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = 'http://localhost:8000';
 
 export const useAi = create((set, get) => ({
   loading: false,
@@ -21,7 +21,7 @@ export const useAi = create((set, get) => ({
       const values = timeSeries.map((ts) => Number(ts.price));
       const dates = timeSeries.map((ts) => formatDate(ts.date));
 
-      console.log("Posting to transformer", { dates, values });
+      console.log('Posting to transformer', { dates, values });
 
       const response = await axios.post(`${BASE_URL}/transformer`, {
         dates: dates,
@@ -33,12 +33,12 @@ export const useAi = create((set, get) => ({
         batch_size: 2,
       });
 
-      console.log("Received response from transformer:", response.data);
+      console.log('Received response from transformer:', response.data);
 
       // Store forecast data.
       set({ forecast: response.data, error: null });
     } catch (error) {
-      console.log("Error in ML API", error);
+      console.log('Error in ML API', error);
     } finally {
       set({ loading: false });
     }
