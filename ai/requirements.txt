@@ -1,6 +1,0 @@
-uvicorn
-numpy
-pandas
-fastapi
-pydantic
-torch

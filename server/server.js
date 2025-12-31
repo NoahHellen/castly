@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import { sql } from "./config/db.js";
+import { rdsConnection } from "./config/db.js";
 import router from "./routes/routes.js";
 import { arcjectMiddleware } from "./middlewares/arcjetMiddleware.js";
 import { coreMiddleware } from "./middlewares/coreMiddleware.js";
@@ -26,13 +26,13 @@ app.use("/api", router);
 // Initialise RDS database.
 async function initDatabase() {
   try {
-    await sql`
+    await rdsConnection.query(`
 			CREATE TABLE IF NOT EXISTS time_series (
         id SERIAL PRIMARY KEY,
 				date TIMESTAMP,
 				price NUMERIC(8,2)
 			)
-		`;
+		`);
     console.log("Database initialised successfully");
   } catch (error) {
     console.log("Error in initDatabase function", error);
